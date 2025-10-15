@@ -102,13 +102,21 @@ void loop() {
     delay(1000);
   } 
   else if (c == 1) {
-    rad_num++;
-    Serial.println("rad up");
+    if (rad_num < 10) {
+      rad_num++;
+      Serial.print("rad up: ");   
+      Serial.println(rad_num); 
+    }
+    
     delay(1000);
   } 
   else if (d == 1) {
-    rad_num--;
-    Serial.println("rad down");
+    if (rad_num > 0) {
+      rad_num--;
+      Serial.print("rad down: ");
+      Serial.println(rad_num);
+    }
+    
     delay(1000);
   }
   
