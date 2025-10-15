@@ -52,12 +52,12 @@ RF24Audio rfAudio(radio, rad_num);     // Set up the audio using the radio, and 
 // transmit button A1
 // receiving LED 6
 
-volatile char vol = 5; // range is 0 to 7
+volatile char vol = 4; // range is 0 to 7
 
-const int vol_up = 2;
-const int vol_down = 3;
-const int freq_up = 4;
-const int freq_down = 5;
+#define vol_up 2
+#define vol_down 3
+#define freq_up 4
+#define freq_down 5
 
 void setup() {          
 
@@ -84,22 +84,22 @@ void loop() {
   if (a == 1) {
     if (vol < 7) {
       vol++;
-      rfAudio.volume(vol);
+      rfAudio.setVolume(vol);
       Serial.print("vol up: ");
-      Serial.println(vol);
+      Serial.println((int) vol);
     }
     
-    delay(1000);
+    delay(100);
   } 
   else if (b == 1) {
     if (vol > 0) {
       vol--;
-      rfAudio.volume(0);
-      Serial.print("vol down");
-      Serial.println(vol);
+      rfAudio.setVolume(vol);
+      Serial.print("vol down: ");
+      Serial.println((int) vol);
     }
     
-    delay(1000);
+    delay(100);
   } 
   else if (c == 1) {
     if (rad_num < 10) {
