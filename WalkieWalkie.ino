@@ -4,7 +4,7 @@
 This sketch is intended to demonstrate the most basic functionality of the audio library.
 
 Requirements:
-2 Arduinos (Uno,Nano,Mega, etc supported)
+2 Arduinos (Uno,Nano)
 2 NRF24LO1 Radio Modules
 1 or more input devices (microphone, ipod, etc)
 1 or more output devices (speaker, amplifier, etc)
@@ -33,8 +33,19 @@ Note: Pin selections can be overridden by modifying the userConfig.h file includ
 #include <RF24.h>
 #include <SPI.h>
 #include <RF24Audio.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 
-RF24 radio(7,8);  
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+#define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
+#define SCREEN_ADDRESS 0x3C // 0x3D or _0x3C_
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+#define CE 7
+#define CS 8
+RF24 radio(CE, CS);  
+
 volatile int rad_num = 1;              // Set radio up using pins 7 (CE) 8 (CS)
 RF24Audio rfAudio(radio, rad_num);     // Set up the audio using the radio, and set to radio number 0.
                                 // Setting the radio number is only important if one-to-one communication is desired
@@ -49,37 +60,64 @@ RF24Audio rfAudio(radio, rad_num);     // Set up the audio using the radio, and 
 
 // speaker 10 and 9
 // microphone A0
-// transmit button A1
+
 // receiving LED 6
 
 volatile char vol = 4; // range is 0 to 7
-
 #define vol_up 2
 #define vol_down 3
 #define freq_up 4
 #define freq_down 5
 
-void setup() {          
+#define light_button A3
+#define light_out 6
+volatile bool light_state = false;
 
+
+// transmit button A1
+
+
+
+
+void setup() {          
   rfAudio.begin();              // Initialize the library.
+  
   pinMode(vol_up, INPUT);
   pinMode(vol_down, INPUT);
   pinMode(freq_up, INPUT);
   pinMode(freq_down, INPUT);
+  pinMode(light_button, INPUT);
+  pinMode(light_out, OUTPUT);
 
   rfAudio.setVolume(vol);
   Serial.begin(9600);
 
+  if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
+    Serial.println(F("SSD1306 allocation failed"));
+  }
+
+  display.clearDisplay();
+  // Draw a single pixel in white
+  display.drawPixel(10, 10, SSD1306_WHITE);
+
+  // Show the display buffer on the screen. You MUST call display() after
+  // drawing commands to make them visible on screen!
+  display.display();
+  delay(2000);
 }
 
 void loop() {
   
   rfAudio.handleButtons();
 
+  home_text();
+
   int a = digitalRead(vol_up);
   int b = digitalRead(vol_down);
   int c = digitalRead(freq_up);
   int d = digitalRead(freq_down);
+  
+  int l = digitalRead(lights);
   
   if (a == 1) {
     if (vol < 7) {
@@ -119,7 +157,51 @@ void loop() {
     
     delay(1000);
   }
+  else if (l == 1) {
+    lightSwitch();
+  }
   
+}
+
+void lightSwitch() {
+  light_state = !light_state;
+  if (light_state) {
+    analogWrite(200, light_out);
+  } else {
+    analogWrite(0, light_out);
+  }
+}
+
+void home_text(void) {
+  int volume = 5;
+  int radio_num = 4;
+  display.clearDisplay();
+
+  display.setTextSize(2); // Draw 2X-scale text
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(10, 0);
+  
+  display.print(F("Battery Life: "));
+  display.print(F(battery));
+  display.println(F("%"));
+
+  display.display();      // Show initial text
+  delay(2000);
+
+  display.setCursor(20, 0);
+  
+  display.print(F("Volume: "));
+  display.println(F(volume));
+
+  display.display();      // Show initial text
+  delay(2000);
+
+  display.print(F("Channel: "));
+  display.println(F(radio_num));
+
+  display.display();      // Show initial text
+  delay(2000);
+
 }
 
 
