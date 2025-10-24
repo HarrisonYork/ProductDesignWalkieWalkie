@@ -2,7 +2,7 @@
 Product Design repository
 
 ## FRS Frequencies
-SA818s module transmits at 1 W at high power. Some FRS frequencies allow only 0.5 W, others up to 2 W. To use the 25 KHz bandwidth offered by the module, can use the following 8 channels:
+SA818s module transmits at 1 W at high power. Some FRS frequencies allow only 0.5 W, others up to 2 W. To use the 25 KHz bandwidth offered by the module, transmitting at 1 W, can use the following 8 channels:
 |Ch#|   MHz    |
 |---|----------|
 | 1 | 462.5500 |
