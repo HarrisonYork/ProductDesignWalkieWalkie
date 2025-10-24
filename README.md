@@ -52,7 +52,7 @@ Rx_CXCSS: Receive CXCSS value
 
 expected response: `+DMOSETGROUP:0`
 
-- :1 means error
+- `+DMOSETGROUP:1` means error
 
 Set volume:
 
@@ -64,7 +64,7 @@ volume can be 1-8
 
 expected response: `+DMOSETVOLUME:0`
 
-- :1 means error, volume level does not matter for response
+- `+DMOSETVOLUME:1` means error, volume level does not matter for response
 
 Read version:
 
