@@ -3,6 +3,8 @@
 This project uses the following external libraries:
 * NewSoftSerial: https://github.com/HarrisonYork/NewSoftSerial (provides serial over digital pins)
 * NeoPixel: https://github.com/adafruit/Adafruit_NeoPixel (RGB LED control)
+* Adafruit SSD1306: https://github.com/adafruit/Adafruit_SSD1306 (OLED Display control)
+* Adafruit GFX: https://github.com/adafruit/Adafruit-GFX-Library (OLED Display control)
 
 ## FRS Frequencies
 SA818s module transmits at 1 W at high power. Some FRS frequencies allow only 0.5 W, others up to 2 W. To use the 25 KHz bandwidth offered by the module, transmitting at 1 W, can use the following channels:
