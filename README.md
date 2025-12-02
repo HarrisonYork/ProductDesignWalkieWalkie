@@ -5,38 +5,25 @@ This project uses the following libraries:
 * NeoPixel: https://github.com/adafruit/Adafruit_NeoPixel (RGB LED control)
 
 ## FRS Frequencies
-SA818s module transmits at 1 W at high power. Some FRS frequencies allow only 0.5 W, others up to 2 W. To use the 25 KHz bandwidth offered by the module, transmitting at 1 W, can use the following 8 channels:
-Transmit to channel 1 on walkie talkie: `AT+DMOSETGROUP=0,462.5625,462.5625,0000,4,0000`
+SA818s module transmits at 1 W at high power. Some FRS frequencies allow only 0.5 W, others up to 2 W. To use the 25 KHz bandwidth offered by the module, transmitting at 1 W, can use the following channels:
 
 |Ch#|   MHz    |
 |---|----------|
-| 1 | 462.5500 |
-| 2 | 462.5750 |
-| 3 | 462.6000 |
-| 4 | 462.6250 |
-| 5 | 462.6500 |
-| 6 | 462.6750 |
-| 7 | 462.7000 |
-| 8 | 462.7250 |
-
-## SA818s Debug Circuit
-| Arduino                     | SA818S  | Notes                                 |
-| --------------------------- | ------- | ------------------------------------- |
-| **GND**                     | **GND** | Common ground                         |
-| **4 V**                     | **VCC** | Must supply 4 V @ ≥1.5 A              |
-| **D2**                      | **PTT** | HIGH = RX mode, LOW = TX              |
-| **D3**                      | **PD**  | HIGH = on, LOW = power down           |
-| **D10 (Ard RX, radio TX)**  | **TXD** | Module → Arduino                      |
-| **D11 (TX)**                | **RXD** | Arduino → Module (use V divider)      |
-
-Refer to the SA818s datasheet for the rest of the pinout.
+| 1 | 462.5625 |
+| 2 | 462.5875 |
+| 3 | 462.6125 |
+| 4 | 462.6375 |
+| 5 | 462.6625 |
+| 6 | 462.6875 |
+| 7 | 462.7125 |
+| 8 | 467.5625 |
 
 ## Programming the SA818s
 On serial monitor, make sure “Both NL and CR” selected for line ending
 
 Setting transmit, receive frequencies
 ```python
-AT+DMOSETGROUP=0,462.5500,462.5500,0000,4,0000
+AT+DMOSETGROUP=0,462.5625,462.5625,0000,4,0000
 ```
 
 AT+DMOSETGROUP=GBW, TFV, RFV, Tx_CXCSS, SQ, Rx_CXCSS
