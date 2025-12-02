@@ -1,5 +1,9 @@
 # ProductDesign
 
+Walkie Walkie is a smart device designed to connect hikers in the wilderness. It combines the sturdiness of a hiking stick with the features of a walkie talkie and flashlight, ensuring you can keep in contact with your hiking party despite physical separation. This project was a part of the Fall 2025 Product Design showcase at Duke.
+
+Full project documentation: https://www.harrisonyork.com/productdesign
+
 This project uses the following external libraries:
 * NewSoftSerial: https://github.com/HarrisonYork/NewSoftSerial (provides serial over digital pins)
 * NeoPixel: https://github.com/adafruit/Adafruit_NeoPixel (RGB LED control)
