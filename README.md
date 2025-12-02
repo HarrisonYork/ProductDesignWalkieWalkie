@@ -1,6 +1,6 @@
 # ProductDesign
 
-This project uses the following libraries:
+This project uses the following external libraries:
 * NewSoftSerial: https://github.com/HarrisonYork/NewSoftSerial (provides serial over digital pins)
 * NeoPixel: https://github.com/adafruit/Adafruit_NeoPixel (RGB LED control)
 
